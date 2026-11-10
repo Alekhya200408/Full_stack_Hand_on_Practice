@@ -1,3 +1,4 @@
+import mongoose from "mongoose"
 import TaskModel from "../models/TaskModel.js"
 
 const CreateTask=async(req,res)=>{
@@ -9,8 +10,18 @@ const CreateTask=async(req,res)=>{
             })
         }
 
+        const isExistTask=await TaskModel.findOne({
+            title:title.trim().toLowerCase()
+        })
+
+        if (isExistTask){
+            return res.status(409).json({
+                message:"Task name is already Exist,it prevents for making duplicates try some new task name"
+            })
+        }
+
         const task=await TaskModel.create({
-        title,
+        title:title.trim().toLowerCase(),
         description,
         status,
         priority
@@ -28,5 +39,23 @@ const CreateTask=async(req,res)=>{
     }
 }
 
-export  {CreateTask};
+const getAlltasks=async(req,res)=>{
+    try {
+       
+        const tasks=await TaskModel.find()
+
+        return res.status(200).json({
+            message:"All Tasks retrieved Successfully",
+            tasks:tasks
+        })
+    } catch (error) {
+        return res.status(500).json({
+            error:error.message
+        })
+    }
+
+    
+}
+
+export  {CreateTask,getAlltasks};
 
