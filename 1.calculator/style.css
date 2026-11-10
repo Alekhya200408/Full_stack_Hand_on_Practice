@@ -1,0 +1,35 @@
+body{
+    color: white;
+    background-color: rgb(37, 36, 36);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    height: 400px;
+    width: 300px;
+    background-color: aquamarine;
+    margin: 30px;
+    
+}
+
+.textbar{
+    margin: 15px;
+    height: 50px;
+    width:260px;
+}
+
+.numpad{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4, 70px);
+    height: 315px;  
+}
+
+.numpad button{
+    
+
+    height: 50px;
+    width: 65px;
+}
